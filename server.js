@@ -1,26 +1,22 @@
-// const http = require('http')
-// const hostname = '127.0.0.1'
-// const port = 3000
-// const server = http.createServer((req, res) => {
-//     res.statusCode = 200
-//     res.setHeader('Content-Type', 'text/plain')
-//     res.end('Hello World von Friedrich\n')
-// })
+const axios = require('axios');
+const fs = require('fs')
+const path = require('path');
 
-// server.listen(port, hostname, () => {
-//     console.log(`Server running at http://${hostname}:${port}/`)
-// })
-const fs = require('fs');
 
-const https = require('https')
-const options = { 
-    hostname: 'example.com',
-    port: 443, 
-    path: '/todos', 
-    method: 'GET', 
-}
+fs.mkdir(path.join(__dirname, 'test'), (err) => {
+    if (err) {
+        return console.error(err);
+    }
+    console.log('Directory created successfully!');
+});
 
-const req = https.request(options, res => { 
-    console.log(`statusCode: ${res.statusCode}`)
+axios
+  .get('https://example.com/todos')
+  .then(res => {
+    console.log(`statusCode: ${res.status}`);
+    console.log(res);
+  })
+  .catch(error => {
+    console.error(error);
+  });
 
-})
