@@ -1,12 +1,12 @@
-const fs = require('fs')
-const path = require('path');
+const EventEmitter = require('events')
+const eventEmitter = new EventEmitter()
 
 
-const content = 'Some content!';
 
-fs.writeFile('/home/friedrichtenhagen/node-server/test.txt', content, err => {
-  if (err) {
-    console.error(err);
-  }
-  // file written successfully
-});
+
+eventEmitter.on('start', (num) => console.log(`Es geht los ${num}`))
+
+
+
+
+eventEmitter.emit('start', 132)
